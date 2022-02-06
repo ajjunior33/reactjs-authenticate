@@ -7,9 +7,13 @@ async function signIn(data) {
       return response.data;
     })
     .catch((err) => {
+      const messageError = err.response.data.messager
+        ? err.response.data.messager
+        : err.response.data.error;
+      console.log(err.response.data);
       throw {
         error: err,
-        message: err.message,
+        message: messageError,
         statusCode: err.code,
       };
     });
